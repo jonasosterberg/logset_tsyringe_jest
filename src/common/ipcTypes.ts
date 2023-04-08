@@ -1,0 +1,1 @@
+export const UserTypes = { getAllUser: "getAllUser", addUser: "addUser", deleteUser: "deleteUser" } as const;
