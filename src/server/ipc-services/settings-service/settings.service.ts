@@ -3,7 +3,12 @@ import { injectable } from "tsyringe";
 
 @injectable()
 class SettingsService {
-    register = () => {
+
+    constructor() {
+        this.registerForEvents();
+    }
+
+    private registerForEvents = () => {
         ipcMain.handle("dark-mode:toggle", () => {
             if (nativeTheme.shouldUseDarkColors) {
                 nativeTheme.themeSource = "light";

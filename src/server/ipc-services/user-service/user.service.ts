@@ -2,16 +2,18 @@ import { ipcMain } from "electron";
 import { inject, injectable } from "tsyringe";
 import { UserTypes } from "../../../common/ipcTypes";
 import { IUsersRepo } from "../../repositories/users/models";
+import { IUserService } from "./models";
 
 @injectable()
-class UserService {
+class UserService implements IUserService{
     private readonly repo: IUsersRepo;
 
     constructor(@inject("IUsersRepo") repo: IUsersRepo) {
         this.repo = repo;
+        this.registerForEvents();
     }
 
-    register = () => {
+    private registerForEvents = () => {
         ipcMain.handle(UserTypes.getAllUser, () => {
             const response = this.repo.getAllUsers();
             return response;

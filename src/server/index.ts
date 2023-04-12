@@ -8,10 +8,9 @@ const init = async () => {
     Registry.init();
     await dbConnection();
     
-    const settingsService = container.resolve(SettingsService);
-    settingsService.register();
-    const userService = container.resolve<IUserService>("IUserService");
-    userService.register();
+    // Manual "Activation" of ipc handlers
+    container.resolve(SettingsService);
+    container.resolve<IUserService>("IUserService");
 };
 
 export default init;
